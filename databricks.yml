@@ -1,0 +1,37 @@
+
+bundle:
+  name: databricks_poc
+  uuid: 8cdfe84c-7c3f-457a-8fe5-4532f840fb1b
+
+include:
+  - resources/*.yml
+
+artifacts:
+  python_artifact:
+    type: whl
+    build: uv build --wheel
+
+variables:
+  catalog:
+    description: The catalog to use
+  schema:
+    description: The schema to use
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405604471619758.18.azuredatabricks.net
+    variables:
+      catalog: poc
+      schema: dev
+
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-7405604471619758.18.azuredatabricks.net
+      root_path: /Workspace/Users/lifeindevops@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: poc
+      schema: prod

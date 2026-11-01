@@ -1,0 +1,13 @@
+﻿customer_id,gender,age,tenure_months,monthly_charges,total_charges,churn
+C001,Male,25,3,70.5,211.5,Yes
+C002,Female,42,24,85.0,2040.0,No
+C003,Male,35,12,60.0,720.0,No
+C004,Female,29,2,95.5,191.0,Yes
+C005,Male,51,48,110.0,5280.0,No
+C006,Female,38,18,75.0,1350.0,No
+C007,Male,23,1,55.0,55.0,Yes
+C008,Female,45,36,90.0,3240.0,No
+C009,Male,31,6,80.0,480.0,Yes
+C010,Female,56,60,105.0,6300.0,No
+C011,Male,27,8,65.0,520.0,Yes
+C012,Female,40,30,88.0,2640.0,No
