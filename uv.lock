@@ -201,23 +201,25 @@ source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [
-    { name = "databricks-connect" },
     { name = "databricks-dlt" },
     { name = "ipykernel" },
     { name = "pytest" },
     { name = "ruff" },
+]
+integration = [
+    { name = "databricks-connect" },
 ]
 
 [package.metadata]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "databricks-connect", specifier = ">=16.4,<16.5" },
     { name = "databricks-dlt" },
     { name = "ipykernel" },
     { name = "pytest" },
     { name = "ruff" },
 ]
+integration = [{ name = "databricks-connect", specifier = ">=16.4,<16.5" }]
 
 [[package]]
 name = "databricks-sdk"

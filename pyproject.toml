@@ -16,8 +16,11 @@ dev = [
     "pytest",
     "ruff",
     "databricks-dlt",
-    "databricks-connect>=16.4,<16.5",
     "ipykernel",
+]
+
+integration = [
+    "databricks-connect>=16.4,<16.5",
 ]
 
 [project.scripts]
