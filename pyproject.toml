@@ -29,3 +29,7 @@ build-backend = "hatchling.build"
 
 [tool.ruff]
 line-length = 120
+
+[tool.ruff.lint]
+[tool.ruff.lint.per-file-ignores]
+"src/databricks_poc_etl/transformations/*.py" = ["F821"]
