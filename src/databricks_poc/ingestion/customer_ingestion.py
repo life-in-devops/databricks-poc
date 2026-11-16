@@ -21,9 +21,14 @@ CUSTOMER_SCHEMA = StructType(
 )
 
 
-def ingest_customers(spark: SparkSession, catalog: str, schema: str) -> None:
-    # Environment-specific paths
-    source_path = f"/Volumes/{catalog}/{schema}/customer_data/customers.csv"
+def ingest_customers(
+    spark: SparkSession,
+    catalog: str,
+    schema: str,
+    source_file: str = "customers.csv",
+) -> None:
+    # Environment-specific source file and tables
+    source_path = f"/Volumes/{catalog}/{schema}/customer_data/{source_file}"
     bronze_table = f"{catalog}.{schema}.bronze_customers"
     silver_table = f"{catalog}.{schema}.silver_customers"
 
@@ -54,5 +59,6 @@ def ingest_customers(spark: SparkSession, catalog: str, schema: str) -> None:
     (silver_df.write.format("delta").mode("overwrite").saveAsTable(silver_table))
 
     print("Customer ingestion completed successfully.")
+    print(f"Source file: {source_path}")
     print(f"Bronze records: {spark.table(bronze_table).count()}")
     print(f"Silver records: {spark.table(silver_table).count()}")
