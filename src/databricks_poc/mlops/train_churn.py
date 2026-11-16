@@ -2,7 +2,6 @@ import argparse
 
 import mlflow
 import mlflow.sklearn
-import pandas as pd
 from pyspark.sql import SparkSession
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LogisticRegression
