@@ -1,22 +1,41 @@
 import argparse
 
-from databricks.sdk.runtime import spark
+from pyspark.sql import SparkSession
 
-from databricks_poc.ingestion.customer_ingestion import ingest_customers
+from databricks_poc.customer_ingestion import ingest_customers
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Databricks customer ingestion POC")
+    parser = argparse.ArgumentParser(description="Customer ingestion into Databricks Bronze and Silver tables")
 
-    parser.add_argument("--catalog", required=True)
-    parser.add_argument("--schema", required=True)
+    parser.add_argument(
+        "--catalog",
+        required=True,
+        help="Unity Catalog catalog name",
+    )
+
+    parser.add_argument(
+        "--schema",
+        required=True,
+        help="Unity Catalog schema name",
+    )
+
+    parser.add_argument(
+        "--source-file",
+        default="customers.csv",
+        help="Customer CSV filename in the Unity Catalog volume",
+    )
 
     args = parser.parse_args()
 
-    spark.sql(f"USE CATALOG `{args.catalog}`")
-    spark.sql(f"USE SCHEMA `{args.schema}`")
+    spark = SparkSession.builder.getOrCreate()
 
-    ingest_customers(spark, args.catalog, args.schema)
+    ingest_customers(
+        spark=spark,
+        catalog=args.catalog,
+        schema=args.schema,
+        source_file=args.source_file,
+    )
 
 
 if __name__ == "__main__":
