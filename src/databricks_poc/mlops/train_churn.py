@@ -2,6 +2,7 @@ import argparse
 
 import mlflow
 import mlflow.sklearn
+from mlflow import MlflowClient
 from pyspark.sql import SparkSession
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LogisticRegression
@@ -111,6 +112,27 @@ def main():
             signature=signature,
             input_example=input_example,
         )
+
+        registered_model_name = f"{args.catalog}.{args.schema}.customer_churn_model"
+
+        mlflow.set_registry_uri("databricks-uc")
+
+        registered_model = mlflow.register_model(
+            model_uri=model_info.model_uri,
+            name=registered_model_name,
+        )
+
+        client = MlflowClient(registry_uri="databricks-uc")
+
+        client.set_registered_model_alias(
+            name=registered_model_name,
+            alias="Champion",
+            version=registered_model.version,
+        )
+
+        print(f"Registered model: {registered_model_name}")
+        print(f"Model version: {registered_model.version}")
+        print("Model alias: Champion")
 
         print("Training completed")
         print(f"Training table: {table_name}")
