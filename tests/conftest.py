@@ -1,4 +1,3 @@
-
 # """Pytest fixtures for local and Databricks integration tests."""
 
 # import csv
