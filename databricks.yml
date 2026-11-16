@@ -18,20 +18,19 @@ variables:
     description: The schema to use
 
 targets:
-  dev:
-    mode: development
+  preprod:
     default: true
     workspace:
-      host: https://adb-7405604471619758.18.azuredatabricks.net
+      host: https://adb-7405604730523602.2.azuredatabricks.net
     variables:
-      catalog: poc
-      schema: dev
+      catalog: dev
+      schema: preprod
 
   prod:
     mode: production
     workspace:
       host: https://adb-7405604471619758.18.azuredatabricks.net
-      root_path: /Workspace/Users/lifeindevops@gmail.com/.bundle/${bundle.name}/${bundle.target}
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     variables:
-      catalog: poc
+      catalog: dev
       schema: prod

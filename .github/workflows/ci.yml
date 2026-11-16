@@ -5,9 +5,11 @@ on:
   push:
     branches:
       - develop
+      - main
   pull_request:
     branches:
       - develop
+      - main
   workflow_dispatch:
 
 permissions:
@@ -31,7 +33,7 @@ jobs:
         run: python -m pip install uv
 
       - name: Install dependencies
-        run: uv sync --group dev
+        run: uv sync --group preprod
 
       - name: Run Ruff
         run: uv run ruff check src/databricks_poc src/databricks_poc_etl tests
@@ -45,5 +47,5 @@ jobs:
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Validate Dev bundle
+      - name: Validate Preprod bundle
         run: databricks bundle validate -t dev
