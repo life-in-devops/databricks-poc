@@ -2,10 +2,10 @@
 name: Databricks POC - CI
 
 on:
-  push:
-    branches:
-      - develop
-      - main
+  # push:
+  #   branches:
+  #     - develop
+  #     - main
   pull_request:
     branches:
       - develop
