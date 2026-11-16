@@ -13,12 +13,19 @@ on:
   workflow_dispatch:
 
 permissions:
+  id-token: write
   contents: read
 
 jobs:
   validate:
     name: Python and Databricks Validation
     runs-on: ubuntu-latest
+    environment: preprod
+
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ vars.DATABRICKS_CLIENT_ID }}
 
     steps:
       - name: Checkout repository
