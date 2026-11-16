@@ -45,8 +45,17 @@ jobs:
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
 
+      - name: Verify Production environment
+        run: |
+          echo "Host: $DATABRICKS_HOST"
+          echo "Client ID: $DATABRICKS_CLIENT_ID"
+          echo "Auth type: $DATABRICKS_AUTH_TYPE"  
+
       - name: Verify Production authentication
-        run: databricks current-user me
+        run: |
+          databricks version
+          databricks auth describe
+          databricks current-user me
 
       - name: Validate Production bundle
         run: databricks bundle validate -t prod
