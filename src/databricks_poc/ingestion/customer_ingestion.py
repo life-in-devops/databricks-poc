@@ -8,7 +8,7 @@ from pyspark.sql.types import (
     StructType,
 )
 
-SOURCE_PATH = "/Volumes/poc/dev/customer_data/customers.csv"
+SOURCE_PATH = "/Volumes/dev/preprod/customer_data/customers.csv"
 
 BRONZE_TABLE = "dev.preprod.bronze_customers"
 SILVER_TABLE = "dev.preprod.silver_customers"
