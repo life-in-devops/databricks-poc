@@ -1,7 +1,7 @@
 [project]
 name = "databricks_poc"
 version = "0.0.1"
-authors = [{ name = "lifeindevops@gmail.com" }]
+authors = [{ name = "mlopsforge@gmail.com" }]
 requires-python = ">=3.12,<3.13"
 dependencies = [
     # Any dependencies for jobs and pipelines in this project can be added here
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = [
+preprod = [
     "pytest",
     "ruff",
     "databricks-dlt",

@@ -1,0 +1,9 @@
+{
+  "oidc_policy": {
+    "issuer": "https://token.actions.githubusercontent.com",
+    "audiences": [
+      "8ff925d2-0060-4430-9b6f-789a945f276e"
+    ],
+    "subject": "repo:life-in-devops@129029918/databricks-poc@1441502385:environment:prod"
+  }
+}

@@ -16,7 +16,7 @@ def main():
     spark.sql(f"USE CATALOG `{args.catalog}`")
     spark.sql(f"USE SCHEMA `{args.schema}`")
 
-    ingest_customers(spark)
+    ingest_customers(spark, args.catalog, args.schema)
 
 
 if __name__ == "__main__":

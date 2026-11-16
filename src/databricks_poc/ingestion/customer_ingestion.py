@@ -8,11 +8,6 @@ from pyspark.sql.types import (
     StructType,
 )
 
-SOURCE_PATH = "/Volumes/poc/dev/customer_data/customers.csv"
-
-BRONZE_TABLE = "poc.dev.bronze_customers"
-SILVER_TABLE = "poc.dev.silver_customers"
-
 CUSTOMER_SCHEMA = StructType(
     [
         StructField("customer_id", StringType(), False),
@@ -26,18 +21,23 @@ CUSTOMER_SCHEMA = StructType(
 )
 
 
-def ingest_customers(spark: SparkSession) -> None:
+def ingest_customers(spark: SparkSession, catalog: str, schema: str) -> None:
+    # Environment-specific paths
+    source_path = f"/Volumes/{catalog}/{schema}/customer_data/customers.csv"
+    bronze_table = f"{catalog}.{schema}.bronze_customers"
+    silver_table = f"{catalog}.{schema}.silver_customers"
+
     # 1. Read source CSV
-    customers_df = spark.read.option("header", "true").schema(CUSTOMER_SCHEMA).csv(SOURCE_PATH)
+    customers_df = spark.read.option("header", "true").schema(CUSTOMER_SCHEMA).csv(source_path)
 
     # 2. Add ingestion metadata
     bronze_df = customers_df.withColumn("ingestion_timestamp", current_timestamp())
 
     # 3. Write raw data to Bronze
-    (bronze_df.write.format("delta").mode("overwrite").saveAsTable(BRONZE_TABLE))
+    (bronze_df.write.format("delta").mode("overwrite").saveAsTable(bronze_table))
 
     # 4. Read Bronze data
-    bronze_data = spark.table(BRONZE_TABLE)
+    bronze_data = spark.table(bronze_table)
 
     # 5. Basic data-quality filtering and cleaning
     silver_df = (
@@ -51,8 +51,8 @@ def ingest_customers(spark: SparkSession) -> None:
     )
 
     # 6. Write cleaned data to Silver
-    (silver_df.write.format("delta").mode("overwrite").saveAsTable(SILVER_TABLE))
+    (silver_df.write.format("delta").mode("overwrite").saveAsTable(silver_table))
 
     print("Customer ingestion completed successfully.")
-    print(f"Bronze records: {spark.table(BRONZE_TABLE).count()}")
-    print(f"Silver records: {spark.table(SILVER_TABLE).count()}")
+    print(f"Bronze records: {spark.table(bronze_table).count()}")
+    print(f"Silver records: {spark.table(silver_table).count()}")
