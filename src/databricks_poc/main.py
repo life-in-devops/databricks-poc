@@ -2,7 +2,7 @@ import argparse
 
 from pyspark.sql import SparkSession
 
-from databricks_poc.customer_ingestion import ingest_customers
+from databricks_poc.ingestion.customer_ingestion import ingest_customers
 
 
 def main():
