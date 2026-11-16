@@ -200,26 +200,26 @@ version = "0.0.1"
 source = { editable = "." }
 
 [package.dev-dependencies]
-dev = [
+integration = [
+    { name = "databricks-connect" },
+]
+preprod = [
     { name = "databricks-dlt" },
     { name = "ipykernel" },
     { name = "pytest" },
     { name = "ruff" },
-]
-integration = [
-    { name = "databricks-connect" },
 ]
 
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [
+integration = [{ name = "databricks-connect", specifier = ">=16.4,<16.5" }]
+preprod = [
     { name = "databricks-dlt" },
     { name = "ipykernel" },
     { name = "pytest" },
     { name = "ruff" },
 ]
-integration = [{ name = "databricks-connect", specifier = ">=16.4,<16.5" }]
 
 [[package]]
 name = "databricks-sdk"
