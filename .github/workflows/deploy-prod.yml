@@ -52,8 +52,8 @@ jobs:
           echo "Auth type: $DATABRICKS_AUTH_TYPE"  
 
       - name: Verify Production authentication
+        working-directory: /tmp
         run: |
-          databricks version
           databricks auth describe
           databricks current-user me
 
