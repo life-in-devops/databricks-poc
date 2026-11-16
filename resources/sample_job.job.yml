@@ -52,3 +52,9 @@ resources:
               # See https://docs.databricks.com/dev-tools/bundles/library-dependencies.html
               # for more information on how to add other libraries.
               - ../dist/*.whl
+      schedule:
+        quartz_cron_expression: "0 0/30 * * * ?"
+        timezone_id: "Asia/Kolkata"
+        pause_status: UNPAUSED
+
+      max_concurrent_runs: 1
