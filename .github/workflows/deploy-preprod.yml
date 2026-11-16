@@ -32,6 +32,12 @@ jobs:
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
 
+      - name: Debug Databricks environment
+        run: |
+          echo "GitHub environment: preprod"
+          echo "Databricks host: $DATABRICKS_HOST"
+          echo "Databricks client ID: $DATABRICKS_CLIENT_ID"
+
       - name: Verify Databricks OIDC authentication
         run: databricks current-user me
 
