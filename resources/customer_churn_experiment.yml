@@ -1,0 +1,5 @@
+
+resources:
+  experiments:
+    customer_churn_experiment:
+      name: /Shared/${bundle.target}_customer_churn_experiment
