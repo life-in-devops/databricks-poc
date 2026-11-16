@@ -26,6 +26,7 @@ integration = [
 [project.scripts]
 main = "databricks_poc.main:main"
 train-churn = "databricks_poc.mlops.train_churn:main"
+predict-churn = "databricks_poc.mlops.predict_churn:main"
 
 [build-system]
 requires = ["hatchling"]
