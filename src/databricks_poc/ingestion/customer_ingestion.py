@@ -10,8 +10,8 @@ from pyspark.sql.types import (
 
 SOURCE_PATH = "/Volumes/poc/dev/customer_data/customers.csv"
 
-BRONZE_TABLE = "poc.dev.bronze_customers"
-SILVER_TABLE = "poc.dev.silver_customers"
+BRONZE_TABLE = "dev.preprod.bronze_customers"
+SILVER_TABLE = "dev.preprod.silver_customers"
 
 CUSTOMER_SCHEMA = StructType(
     [
