@@ -1,0 +1,27 @@
+
+resources:
+  jobs:
+    customer_churn_inference:
+      name: customer_churn_inference
+
+      tasks:
+        - task_key: predict_churn
+          python_wheel_task:
+            package_name: databricks_poc
+            entry_point: predict-churn
+            parameters:
+              - "--catalog"
+              - "${var.catalog}"
+              - "--schema"
+              - "${var.schema}"
+          environment_key: inference
+
+      environments:
+        - environment_key: inference
+          spec:
+            environment_version: "5"
+            dependencies:
+              - ../dist/*.whl
+              - "mlflow==3.12.0"
+              - "scikit-learn==1.7.2"
+              - "pandas"

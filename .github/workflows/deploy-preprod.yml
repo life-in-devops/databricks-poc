@@ -1,5 +1,5 @@
 
-name: Databricks - Deploy Pre-Prod
+name: Databricks Deploy - Pre-Prod
 
 on:
   workflow_dispatch:

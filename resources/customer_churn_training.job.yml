@@ -1,0 +1,29 @@
+
+resources:
+  jobs:
+    customer_churn_training:
+      name: customer_churn_training
+
+      tasks:
+        - task_key: train_churn_model
+          python_wheel_task:
+            package_name: databricks_poc
+            entry_point: train-churn
+            parameters:
+              - "--catalog"
+              - "${var.catalog}"
+              - "--schema"
+              - "${var.schema}"
+              - "--experiment"
+              - "${resources.experiments.customer_churn_experiment.name}"
+          environment_key: ml_training
+
+      environments:
+        - environment_key: ml_training
+          spec:
+            environment_version: "5"
+            dependencies:
+              - ../dist/*.whl
+              - "mlflow==3.12.0"
+              - "scikit-learn==1.7.2"
+              - "pandas"
